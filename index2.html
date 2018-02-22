@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <!-- helloworld -->
+    <container id="main-container">
+        <div id="game-window" style="background-image:url(images/jabbabg1.png)">
+
+            <button id="startButton" type="button">
+                    <span style=font-size:1em id="button=text">Click To Start!</span>
+            </button>
+            
+        </div>
+    </container>
+
+
+
+    <script>
+
+        var promptWindow=$("<div>");
+
+        promptWindow.addId("prompt-window");
+
+        $(".number").on("click", function(){
+            $("#game-window").append(promptWindow);
+        });
+    
+    
+    
+    
+    
+    </script>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+</body>
+</html>

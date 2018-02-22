@@ -7,13 +7,149 @@
     <link rel="stylesheet" type="text/css" href="reset.css">
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
     <!-- helloworld -->
     <container id="main-container">
         <div id="game-window" style="background-image:url(images/jabbabg1.png)">
 
+            <button id="start-button" type="button">
+                    <span>Click To Start!</span>
+            </button>
+
         </div>
     </container>
+
+
+    <script>
+        // declare main variables
+        var startButton=document.getElementById("start-button");
+        var promptWindow=$("<div>");
+        var selectA=$("<div>");
+        var selectB=$("<div>");
+        var selectC=$("<div>");
+        var selectD=$("<div>");
+        var textBox=$("<span>");
+        var charA={
+            "Name":"Boba Fett",
+            "Health":100,
+            "Attack":100,
+            "Base-Attack":100,
+        }
+        var charB={
+            "Name":"Bossk",
+            "Health":200,
+            "Attack":200,
+            "Base-Attack":200,
+        };
+        var charC={
+            "Name":"IG-88",
+            "Health":300,
+            "Attack":300,
+            "Base-Attack":300,
+        };
+        var charD={
+            "Name":"Zuckuss",
+            "Health":400,
+            "Attack":400,
+            "Base-Attack":400,
+        };
+        var currentPlayer
+        var currentOpponent
+        var playerHp
+        var playerAtk
+        var playerBaseAtk
+        var enemyHp
+        var enemyAtk
+
+
+
+        
+        // set classes
+        promptWindow.addClass("prompt-window");
+        selectA.addClass("select-a");
+        selectB.addClass("select-b");
+        selectC.addClass("select-c");
+        selectD.addClass("select-d");
+        textBox.addClass("text-box");
+        // breaks...
+        // selectA=document.getElementsByClassName("select-a");
+        
+
+        // click to start game
+        $("#start-button").click(function (){
+            $("#start-button").attr("style","visibility: hidden")
+           
+            $("#game-window").append(promptWindow);
+            $(".prompt-window").append(textBox);
+            $(".text-box").text("Please Select Your Character");
+            $(".prompt-window").append(selectA);
+            $(".prompt-window").append(selectB);
+            $(".prompt-window").append(selectC);
+            $(".prompt-window").append(selectD);
+
+
+            // user selects thier character
+            $(".select-a").click(function (){
+                $(".select-a").attr("style","visibility: hidden")
+                $(".text-box").text("Please Select Your First Opponent");
+                $(".prompt-window").css("width","700").css("left","260px");
+                $(".select-b").css("left","25px");
+                $(".select-c").css("left","250px");
+                $(".select-d").css("left","475px");
+
+                currentPlayer=charA;
+
+                console.log(currentPlayer);
+
+
+                // user selects first opponent
+                $(".select-b").click(function (){
+                $(".prompt-window").attr("style","visibility: hidden")
+                $(".text-box").text("");
+                $(".select-c").attr("style","visibility: hidden")
+                $(".select-d").attr("style","visibility: hidden")
+                
+                currentOpponent=charB;
+                })
+
+                $(".select-c").click(function (){
+                $(".prompt-window").attr("style","visibility: hidden")
+                $(".text-box").text("");
+                $(".select-b").attr("style","visibility: hidden")
+                $(".select-d").attr("style","visibility: hidden")
+                                
+                currentOpponent=charC;
+                })
+
+                $(".select-d").click(function (){
+                $(".prompt-window").attr("style","visibility: hidden")
+                $(".text-box").text("");
+                $(".select-b").attr("style","visibility: hidden")
+                $(".select-c").attr("style","visibility: hidden")
+                                
+                currentOpponent=charD;
+                })
+
+                console.log(currentOpponent);
+
+            //  end character and opponent select               
+            })
+
+            
+
+        
+            
+            
+
+
+
+
+        // end of start game on click funtion
+        })
+    
+    </script>
+
 </body>
 </html>
