@@ -90,6 +90,26 @@
             $(".prompt-window").append(selectD);
 
 
+            
+            // I know there is a way to write all this as a function with variables for which selection they make 
+            // so that I dont have to  redo do it for all 4 possible character selections but I am unsure of
+            // how exactly to set it up with a funtion?...this didnt seem to work...
+            
+            // function charSelect(char,opp1,opp2,opp3){
+                // $(char).attr("style","visibility: hidden")
+                // $(".text-box").text("Please Select Your First Opponent");
+                // $(".prompt-window").css("width","700").css("left","260px");
+                // $(opp1).css("left","25px");
+                // $(opp2).css("left","250px");
+                // $(opp3).css("left","475px");
+            // }
+
+            // $(".select-a").click(charSelect(".select-a",".select-b","select-c","select-d"));
+            // $(".select-b").click(charSelect(".select-b",".select-a","select-c","select-d"));
+            // $(".select-c").click(charSelect(".select-c",".select-a","select-b","select-d"));
+            // $(".select-d").click(charSelect(".select-d",".select-a","select-b","select-c"));
+            
+            
             // user selects thier character
             $(".select-a").click(function (){
                 $(".select-a").attr("style","visibility: hidden")
