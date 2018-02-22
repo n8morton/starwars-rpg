@@ -14,9 +14,7 @@
     <container id="main-container">
         <div id="game-window" style="background-image:url(images/jabbabg1.png)">
 
-            <button id="start-button" type="button">
-                    <span>Click To Start!</span>
-            </button>
+            
 
         </div>
     </container>
@@ -24,13 +22,18 @@
 
     <script>
         // declare main variables
-        var startButton=document.getElementById("start-button");
+        var startButton=$("<button>");
+        var sbText=$("<span>");
         var promptWindow=$("<div>");
         var selectA=$("<div>");
         var selectB=$("<div>");
         var selectC=$("<div>");
         var selectD=$("<div>");
         var textBox=$("<span>");
+        var playerVs=$("<div>");
+        var opponentVs=$("<div>");
+        var roundText=$("<span>");
+        var fightButton=$("<button>");
         var charA={
             "Name":"Boba Fett",
             "Health":100,
@@ -60,26 +63,47 @@
         var playerHp
         var playerAtk
         var playerBaseAtk
-        var enemyHp
-        var enemyAtk
-
+        var opponentHp
+        var opponentAtk
+        
 
 
         
+        
         // set classes
+        startButton.addClass("start-button");
+        sbText.addClass("sb-text");
         promptWindow.addClass("prompt-window");
         selectA.addClass("select-a");
         selectB.addClass("select-b");
         selectC.addClass("select-c");
         selectD.addClass("select-d");
         textBox.addClass("text-box");
-        // breaks...
-        // selectA=document.getElementsByClassName("select-a");
-        
+        playerVs.addClass("player-vs");
+        opponentVs.addClass("opponent-vs");
+        roundText.addClass("round-text");
+        fightButton.addClass("fight-button");
 
-        // click to start game
-        $("#start-button").click(function (){
-            $("#start-button").attr("style","visibility: hidden")
+        // define functions
+
+        function charSelect(char, opp1, opp2, opp3) {
+	        // return function(event) {
+		        $(char).attr("style","visibility: hidden")
+                $(".text-box").text("Please Select Your First Opponent");
+                $(".prompt-window").css("width","700").css("left","260px");
+                $(opp1).css("left","25px");
+                $(opp2).css("left","250px");
+    	        $(opp3).css("left","475px");	
+	        // };
+        }
+        
+        $("#game-window").append(startButton);
+        $(".start-button").append(sbText);
+        $(".sb-text").text("Click To Start");
+        
+                // click to start game
+        $(".start-button").click(function (){
+            $(".start-button").attr("style","visibility: hidden")
            
             $("#game-window").append(promptWindow);
             $(".prompt-window").append(textBox);
@@ -90,73 +114,48 @@
             $(".prompt-window").append(selectD);
 
 
-            
-            // I know there is a way to write all this as a function with variables for which selection they make 
-            // so that I dont have to  redo do it for all 4 possible character selections but I am unsure of
-            // how exactly to set it up with a funtion?...this didnt seem to work...
-            
-            // function charSelect(char,opp1,opp2,opp3){
-                // $(char).attr("style","visibility: hidden")
-                // $(".text-box").text("Please Select Your First Opponent");
-                // $(".prompt-window").css("width","700").css("left","260px");
-                // $(opp1).css("left","25px");
-                // $(opp2).css("left","250px");
-                // $(opp3).css("left","475px");
-            // }
-
-            // $(".select-a").click(charSelect(".select-a",".select-b","select-c","select-d"));
-            // $(".select-b").click(charSelect(".select-b",".select-a","select-c","select-d"));
-            // $(".select-c").click(charSelect(".select-c",".select-a","select-b","select-d"));
-            // $(".select-d").click(charSelect(".select-d",".select-a","select-b","select-c"));
-            
-            
             // user selects thier character
             $(".select-a").click(function (){
-                $(".select-a").attr("style","visibility: hidden")
-                $(".text-box").text("Please Select Your First Opponent");
-                $(".prompt-window").css("width","700").css("left","260px");
-                $(".select-b").css("left","25px");
-                $(".select-c").css("left","250px");
-                $(".select-d").css("left","475px");
+                charSelect(".select-a",".select-b",".select-c",".select-d");
 
                 currentPlayer=charA;
-
                 console.log(currentPlayer);
 
 
-                // user selects first opponent
+                    // user selects first opponent
                 $(".select-b").click(function (){
-                $(".prompt-window").attr("style","visibility: hidden")
-                $(".text-box").text("");
-                $(".select-c").attr("style","visibility: hidden")
-                $(".select-d").attr("style","visibility: hidden")
+                    $(".prompt-window").attr("style","visibility: hidden")
+                    $(".text-box").text("");
+                    $(".select-c").attr("style","visibility: hidden")
+                    $(".select-d").attr("style","visibility: hidden")
                 
-                currentOpponent=charB;
+                    currentOpponent=charB;
+                    console.log(currentOpponent);
                 })
 
                 $(".select-c").click(function (){
-                $(".prompt-window").attr("style","visibility: hidden")
-                $(".text-box").text("");
-                $(".select-b").attr("style","visibility: hidden")
-                $(".select-d").attr("style","visibility: hidden")
+                    $(".prompt-window").attr("style","visibility: hidden")
+                    $(".text-box").text("");
+                    $(".select-b").attr("style","visibility: hidden")
+                    $(".select-d").attr("style","visibility: hidden")
                                 
-                currentOpponent=charC;
+                    currentOpponent=charC;
+                    console.log(currentOpponent);
                 })
 
                 $(".select-d").click(function (){
-                $(".prompt-window").attr("style","visibility: hidden")
-                $(".text-box").text("");
-                $(".select-b").attr("style","visibility: hidden")
-                $(".select-c").attr("style","visibility: hidden")
+                    $(".prompt-window").attr("style","visibility: hidden")
+                    $(".text-box").text("");
+                    $(".select-b").attr("style","visibility: hidden")
+                    $(".select-c").attr("style","visibility: hidden")
                                 
-                currentOpponent=charD;
-                })
-
-                console.log(currentOpponent);
-
-            //  end character and opponent select               
+                    currentOpponent=charD;
+                    console.log(currentOpponent);
+                })              
             })
 
+            
+            
             
 
         
