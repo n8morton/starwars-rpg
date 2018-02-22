@@ -23,16 +23,16 @@
     <script>
         // declare main variables
         var startButton=$("<button>");
-        var sbText=$("<span>");
+        var sbText=$("<p>");
         var promptWindow=$("<div>");
         var selectA=$("<div>");
         var selectB=$("<div>");
         var selectC=$("<div>");
         var selectD=$("<div>");
-        var textBox=$("<span>");
+        var textBox=$("<p>");
         var playerVs=$("<div>");
         var opponentVs=$("<div>");
-        var roundText=$("<span>");
+        var roundText=$("<p>");
         var fightButton=$("<button>");
         var charA={
             "Name":"Boba Fett",
@@ -88,12 +88,10 @@
 
         function charSelect(char, opp1, opp2, opp3) {
 	        // return function(event) {
-		        $(char).attr("style","visibility: hidden")
+		        $(char).remove();
                 $(".text-box").text("Please Select Your First Opponent");
                 $(".prompt-window").css("width","700").css("left","260px");
-                $(opp1).css("left","25px");
-                $(opp2).css("left","250px");
-    	        $(opp3).css("left","475px");	
+                
 	        // };
         }
         
