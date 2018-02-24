@@ -52,31 +52,37 @@
         var playerBaseAtk
         var opponentHp
         var opponentAtk
+        var fightText = $("<p>");
+        var playerStatus = $("<p>");
+        var opponentStatus = $("<p>");
+        var attackButton = $("<button>");
+        var abText = $("<p>");
+        var winCount = 0;
         var charA = {
             "Name": "Boba Fett",
-            "Health": 100,
-            "Attack": 100,
-            "Base-Attack": 100,
+            "Health": 140,
+            "Attack": 8,
+            "CounterAttack": 25,
         };
         var charB = {
             "Name": "Bossk",
-            "Health": 200,
-            "Attack": 200,
-            "Base-Attack": 200,
+            "Health": 160,
+            "Attack": 7,
+            "CounterAttack": 25,
         };
         var charC = {
             "Name": "IG-88",
-            "Health": 300,
-            "Attack": 300,
-            "Base-Attack": 300,
+            "Health": 120,
+            "Attack": 7,
+            "CounterAttack": 20,
         };
         var charD = {
             "Name": "Zuckuss",
-            "Health": 400,
-            "Attack": 400,
-            "Base-Attack": 400,
+            "Health": 180,
+            "Attack": 6,
+            "CounterAttack": 30,
         };
-        
+
         // set classes
         startButton.addClass("start-button");
         sbText.addClass("sb-text");
@@ -99,26 +105,35 @@
         ig88VsMirror.addClass("ig88-vs-mirror vs-screen");
         bosskVsMirror.addClass("bossk-vs-mirror vs-screen");
         zuckussVsMirror.addClass("zuckuss-vs-mirror vs-screen");
-        
+        attackButton.addClass("attack-button fight-screen");
+        abText.addClass("ab-text fight-screen");
+        fightText.addClass("fight-text fight-screen");
+        playerStatus.addClass("player-status fight-screen");
+        opponentStatus.addClass("opponent-status fight-screen");
+
         $("#game-window").append(startButton, promptWindow);
         $(".start-button").append(sbText);
         $(".sb-text").text("Click To Start");
         $(".prompt-window").append(textBox, selectA, selectB, selectC, selectD).hide();
-        $(".text-box").text("Please Select Your Character");      
-        $("#game-window").append(fightButton, roundText, bobaVs, ig88Vs, bosskVs, zuckussVs, bobaVsMirror, ig88VsMirror, bosskVsMirror, zuckussVsMirror);
+        $(".text-box").text("Please Select Your Character");
+        $("#game-window").append(fightButton, roundText, bobaVs, ig88Vs, bosskVs, zuckussVs, bobaVsMirror, ig88VsMirror, bosskVsMirror, zuckussVsMirror, attackButton, fightText, playerStatus, opponentStatus);
         $(".round-text").text("Round 1");
         $(".vs-screen").hide();
         $(".fight-button").append(fbText);
         $(".fb-text").text("FIGHT!");
-       
+        $(".attack-button").append(abText);
+        $(".ab-text").text("Click To Attack");
+        $(".fight-screen").hide();
 
-                
+
+
+
         // click to start game
         $(".start-button").click(function () {
-        $(".start-button").hide();
-        $(".prompt-window").show();  
+            $(".start-button").hide();
+            $(".prompt-window").show();
         });
-        
+
         // user selects thier character
         $(".select-all").click(function () {
             if (currentPlayer == "none") {
@@ -131,10 +146,128 @@
             else {
                 currentOpponent = $(this).data("character");
                 $(".prompt-window").hide();
+                $(this).hide();
                 $(".vs-screen").show();
                 console.log(currentPlayer, currentOpponent);
 
+                if (currentPlayer.Name == "Boba Fett") {
+                    bobaVs.show();
+                    ig88Vs.hide();
+                    bosskVs.hide();
+                    zuckussVs.hide();
+                }
+                if (currentPlayer.Name == "Bossk") {
+                    bobaVs.hide();
+                    bosskVs.show();
+                    ig88Vs.hide();
+                    zuckussVs.hide();
+                }
+                if (currentPlayer.Name == "IG-88") {
+                    bobaVs.hide();
+                    bosskVs.hide();
+                    ig88Vs.show();
+                    zuckussVs.hide();
+                }
+                if (currentPlayer.Name == "Zuckuss") {
+                    bobaVs.hide();
+                    bosskVs.hide();
+                    ig88Vs.hide();
+                    zuckussVs.show();
+                }
+
+                if (currentOpponent.Name == "Boba Fett") {
+                    bobaVsMirror.show();
+                    ig88VsMirror.hide();
+                    bosskVsMirror.hide();
+                    zuckussVsMirror.hide();
+                }
+                if (currentOpponent.Name == "Bossk") {
+                    bobaVsMirror.hide();
+                    bosskVsMirror.show();
+                    ig88VsMirror.hide();
+                    zuckussVsMirror.hide();
+                }
+                if (currentOpponent.Name == "IG-88") {
+                    bobaVsMirror.hide();
+                    bosskVsMirror.hide();
+                    ig88VsMirror.show();
+                    zuckussVsMirror.hide();
+                }
+                if (currentOpponent.Name == "Zuckuss") {
+                    bobaVsMirror.hide();
+                    bosskVsMirror.hide();
+                    ig88VsMirror.hide();
+                    zuckussVsMirror.show();
+                }
+
             }
+        });
+
+        $(".fight-button").click(function () {
+            $(".fight-button").hide();
+            $(".round-text").hide();
+            $(".fight-screen").show();
+
+            if (winCount == 0) {
+                playerHp = currentPlayer.Health;
+                playerAtk = currentPlayer.Attack;
+            };
+
+            playerBaseAtk = currentPlayer.Attack;
+            opponentHp = currentOpponent.Health;
+            opponentAtk = currentOpponent.CounterAttack;
+
+            $(".player-status").html("Current Health:" + playerHp + "<br> Attack Power:" + playerAtk);
+            $(".opponent-status").html("Current Health:" + opponentHp + "<br> Attack Power:" + opponentAtk);
+
+
+        });
+
+        $(".attack-button").click(function () {
+            opponentHp = (opponentHp - playerAtk);
+            playerHp = (playerHp - opponentAtk);
+            playerAtk = (playerAtk + playerBaseAtk);
+
+            $(".player-status").html("Current Health:" + playerHp + "<br> Current Attack Power:" + playerAtk);
+            $(".opponent-status").html("Current Health:" + opponentHp + "<br> Attack Power:" + opponentAtk);
+
+            if (playerHp < 1) {
+                $(".fight-screen").hide();
+                $(".vs-screen").hide();
+                $(".fight-text").html("GAME OVER<br>Play Again?").show();
+
+            };
+
+            if (opponentHp < 1) {
+
+
+
+                $(".fight-screen").hide();
+                $(".vs-screen").hide();
+                $(".text-box").text("Please Select Your Next Opponent");
+                $(".prompt-window").show()
+                $(".fight-screen").hide();
+                winCount++;
+                if (winCount > 2) {
+                    $(".fight-screen").hide();
+                    $(".vs-screen").hide();
+                    $(".fight-text").html("CONGRATULATIONS!<BR>YOU WIN!<BR>Play Again?").show();
+                    $(".prompt-window").hide();
+
+                };
+
+
+
+
+
+
+
+
+
+            };
+
+
+
         });
 
     </script>
