@@ -60,27 +60,27 @@
         var winCount = 0;
         var charA = {
             "Name": "Boba Fett",
-            "Health": 140,
+            "Health": 160,
             "Attack": 8,
-            "CounterAttack": 25,
+            "CounterAttack": 15,
         };
         var charB = {
             "Name": "Bossk",
-            "Health": 160,
+            "Health": 170,
             "Attack": 7,
-            "CounterAttack": 25,
+            "CounterAttack": 10,
         };
         var charC = {
             "Name": "IG-88",
-            "Health": 120,
-            "Attack": 7,
-            "CounterAttack": 20,
+            "Health": 140,
+            "Attack": 12,
+            "CounterAttack": 10,
         };
         var charD = {
             "Name": "Zuckuss",
             "Health": 180,
             "Attack": 6,
-            "CounterAttack": 30,
+            "CounterAttack": 20,
         };
 
         // set classes
@@ -234,37 +234,22 @@
             if (playerHp < 1) {
                 $(".fight-screen").hide();
                 $(".vs-screen").hide();
-                $(".fight-text").html("GAME OVER<br>Play Again?").show();
-
-            };
-
-            if (opponentHp < 1) {
-
-
-
+                $(".fight-text").html("GAME OVER<br>Play Again?").show()
+            }else if (opponentHp < 1) {
                 $(".fight-screen").hide();
                 $(".vs-screen").hide();
                 $(".text-box").text("Please Select Your Next Opponent");
                 $(".prompt-window").show()
                 $(".fight-screen").hide();
                 winCount++;
+                
                 if (winCount > 2) {
                     $(".fight-screen").hide();
                     $(".vs-screen").hide();
                     $(".fight-text").html("CONGRATULATIONS!<BR>YOU WIN!<BR>Play Again?").show();
                     $(".prompt-window").hide();
-
-                };
-
-
-
-
-
-
-
-
-
-            };
+                }
+            }
 
 
 
