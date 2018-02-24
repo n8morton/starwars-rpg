@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +10,13 @@
     <title>Document</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
+
 <body>
     <!-- helloworld -->
     <container id="main-container">
         <div id="game-window" style="background-image:url(images/jabbabg1.png)">
 
-            
+
 
         </div>
     </container>
@@ -22,151 +24,121 @@
 
     <script>
         // declare main variables
-        var startButton=$("<button>");
-        var sbText=$("<p>");
-        var promptWindow=$("<div>");
-        var selectA=$("<div>");
-        var selectB=$("<div>");
-        var selectC=$("<div>");
-        var selectD=$("<div>");
-        var textBox=$("<p>");
-        var playerVs=$("<div>");
-        var opponentVs=$("<div>");
-        var roundText=$("<p>");
-        var fightButton=$("<button>");
-        var charA={
-            "Name":"Boba Fett",
-            "Health":100,
-            "Attack":100,
-            "Base-Attack":100,
-        }
-        var charB={
-            "Name":"Bossk",
-            "Health":200,
-            "Attack":200,
-            "Base-Attack":200,
-        };
-        var charC={
-            "Name":"IG-88",
-            "Health":300,
-            "Attack":300,
-            "Base-Attack":300,
-        };
-        var charD={
-            "Name":"Zuckuss",
-            "Health":400,
-            "Attack":400,
-            "Base-Attack":400,
-        };
-        var currentPlayer
+        var startButton = $("<button>");
+        var sbText = $("<p>");
+        var promptWindow = $("<div>");
+        var selectA = $("<div>");
+        var selectB = $("<div>");
+        var selectC = $("<div>");
+        var selectD = $("<div>");
+        var textBox = $("<p>");
+        var playerVs = $("<div>");
+        var opponentVs = $("<div>");
+        var roundText = $("<p>");
+        var fightButton = $("<button>");
+        var fbText = $("<p>");
+        var bobaVs = $("<img src=images/bobavs.png>");
+        var ig88Vs = $("<img src=images/ig88vs.png>");
+        var bosskVs = $("<img src=images/bosskvs.png>");
+        var zuckussVs = $("<img src=images/zuckussvs.png>");
+        var bobaVsMirror = $("<img src=images/bobavsmirror.png>");
+        var ig88VsMirror = $("<img src=images/ig88vsmirror.png>");
+        var bosskVsMirror = $("<img src=images/bosskvsmirror.png>");
+        var zuckussVsMirror = $("<img src=images/zuckussvsmirror.png>");
+        var currentPlayer = "none";
         var currentOpponent
         var playerHp
         var playerAtk
         var playerBaseAtk
         var opponentHp
         var opponentAtk
-        
-
-
-        
+        var charA = {
+            "Name": "Boba Fett",
+            "Health": 100,
+            "Attack": 100,
+            "Base-Attack": 100,
+        };
+        var charB = {
+            "Name": "Bossk",
+            "Health": 200,
+            "Attack": 200,
+            "Base-Attack": 200,
+        };
+        var charC = {
+            "Name": "IG-88",
+            "Health": 300,
+            "Attack": 300,
+            "Base-Attack": 300,
+        };
+        var charD = {
+            "Name": "Zuckuss",
+            "Health": 400,
+            "Attack": 400,
+            "Base-Attack": 400,
+        };
         
         // set classes
         startButton.addClass("start-button");
         sbText.addClass("sb-text");
         promptWindow.addClass("prompt-window");
-        selectA.addClass("select-a");
-        selectB.addClass("select-b");
-        selectC.addClass("select-c");
-        selectD.addClass("select-d");
+        selectA.addClass("select-a select-all").data("character", charA);
+        selectB.addClass("select-b select-all").data("character", charB);
+        selectC.addClass("select-c select-all").data("character", charC);
+        selectD.addClass("select-d select-all").data("character", charD);
         textBox.addClass("text-box");
         playerVs.addClass("player-vs");
         opponentVs.addClass("opponent-vs");
-        roundText.addClass("round-text");
-        fightButton.addClass("fight-button");
-
-        // define functions
-
-        function charSelect(char, opp1, opp2, opp3) {
-	        // return function(event) {
-		        $(char).remove();
-                $(".text-box").text("Please Select Your First Opponent");
-                $(".prompt-window").css("width","700").css("left","260px");
-                
-	        // };
-        }
+        roundText.addClass("round-text vs-screen");
+        fightButton.addClass("fight-button vs-screen");
+        fbText.addClass("fb-text  vs-screen");
+        bobaVs.addClass("boba-vs vs-screen");
+        ig88Vs.addClass("ig88-vs vs-screen");
+        bosskVs.addClass("bossk-vs vs-screen");
+        zuckussVs.addClass("zuckuss-vs vs-screen");
+        bobaVsMirror.addClass("boba-vs-mirror vs-screen");
+        ig88VsMirror.addClass("ig88-vs-mirror vs-screen");
+        bosskVsMirror.addClass("bossk-vs-mirror vs-screen");
+        zuckussVsMirror.addClass("zuckuss-vs-mirror vs-screen");
         
-        $("#game-window").append(startButton);
+        $("#game-window").append(startButton, promptWindow);
         $(".start-button").append(sbText);
         $(".sb-text").text("Click To Start");
-        
-                // click to start game
-        $(".start-button").click(function (){
-            $(".start-button").attr("style","visibility: hidden")
-           
-            $("#game-window").append(promptWindow);
-            $(".prompt-window").append(textBox);
-            $(".text-box").text("Please Select Your Character");
-            $(".prompt-window").append(selectA);
-            $(".prompt-window").append(selectB);
-            $(".prompt-window").append(selectC);
-            $(".prompt-window").append(selectD);
+        $(".prompt-window").append(textBox, selectA, selectB, selectC, selectD).hide();
+        $(".text-box").text("Please Select Your Character");      
+        $("#game-window").append(fightButton, roundText, bobaVs, ig88Vs, bosskVs, zuckussVs, bobaVsMirror, ig88VsMirror, bosskVsMirror, zuckussVsMirror);
+        $(".round-text").text("Round 1");
+        $(".vs-screen").hide();
+        $(".fight-button").append(fbText);
+        $(".fb-text").text("FIGHT!");
+       
 
-
-            // user selects thier character
-            $(".select-a").click(function (){
-                charSelect(".select-a",".select-b",".select-c",".select-d");
-
-                currentPlayer=charA;
-                console.log(currentPlayer);
-
-
-                    // user selects first opponent
-                $(".select-b").click(function (){
-                    $(".prompt-window").attr("style","visibility: hidden")
-                    $(".text-box").text("");
-                    $(".select-c").attr("style","visibility: hidden")
-                    $(".select-d").attr("style","visibility: hidden")
                 
-                    currentOpponent=charB;
-                    console.log(currentOpponent);
-                })
-
-                $(".select-c").click(function (){
-                    $(".prompt-window").attr("style","visibility: hidden")
-                    $(".text-box").text("");
-                    $(".select-b").attr("style","visibility: hidden")
-                    $(".select-d").attr("style","visibility: hidden")
-                                
-                    currentOpponent=charC;
-                    console.log(currentOpponent);
-                })
-
-                $(".select-d").click(function (){
-                    $(".prompt-window").attr("style","visibility: hidden")
-                    $(".text-box").text("");
-                    $(".select-b").attr("style","visibility: hidden")
-                    $(".select-c").attr("style","visibility: hidden")
-                                
-                    currentOpponent=charD;
-                    console.log(currentOpponent);
-                })              
-            })
-
-            
-            
-            
-
+        // click to start game
+        $(".start-button").click(function () {
+        $(".start-button").hide();
+        $(".prompt-window").show();  
+        });
         
-            
-            
+        // user selects thier character
+        $(".select-all").click(function () {
+            if (currentPlayer == "none") {
+                currentPlayer = $(this).data("character");
+                $(this).hide();
+                $(".text-box").text("Please Select Your First Opponent");
+                $(".prompt-window").css("width", "700").css("left", "260px");
+                $(".select-all").css("width", "28%").css("margin-left", "3.75%")
+            }
+            else {
+                currentOpponent = $(this).data("character");
+                $(".prompt-window").hide();
+                $(".vs-screen").show();
+                console.log(currentPlayer, currentOpponent);
 
+            }
+        });
 
-
-
-        // end of start game on click funtion
-        })
-    
     </script>
 
 </body>
+
 </html>
