@@ -58,6 +58,9 @@
         var attackButton = $("<button>");
         var abText = $("<p>");
         var winCount = 0;
+        var vsMusic = new Audio("audio/vs.mp3");
+        var fightMusic = new Audio("audio/fightmusic.mp3");
+        var reveal = function(x){x.show()};
         var charA = {
             "Name": "Boba Fett",
             "Health": 160,
@@ -74,12 +77,12 @@
             "Name": "IG-88",
             "Health": 140,
             "Attack": 12,
-            "CounterAttack": 10,
+            "CounterAttack": 15,
         };
         var charD = {
             "Name": "Zuckuss",
             "Health": 180,
-            "Attack": 6,
+            "Attack": 5,
             "CounterAttack": 20,
         };
 
@@ -149,54 +152,51 @@
                 $(this).hide();
                 $(".vs-screen").show();
                 console.log(currentPlayer, currentOpponent);
+                bobaVs.hide();
+                ig88Vs.hide();
+                bosskVs.hide();
+                zuckussVs.hide();
+                bobaVsMirror.hide();
+                ig88VsMirror.hide();
+                bosskVsMirror.hide();
+                zuckussVsMirror.hide();
+                vsMusic.play();
+
+
+
 
                 if (currentPlayer.Name == "Boba Fett") {
-                    bobaVs.show();
-                    ig88Vs.hide();
-                    bosskVs.hide();
-                    zuckussVs.hide();
+                        reveal(bobaVs);
+
                 }
                 if (currentPlayer.Name == "Bossk") {
-                    bobaVs.hide();
                     bosskVs.show();
-                    ig88Vs.hide();
-                    zuckussVs.hide();
+
                 }
                 if (currentPlayer.Name == "IG-88") {
-                    bobaVs.hide();
-                    bosskVs.hide();
                     ig88Vs.show();
-                    zuckussVs.hide();
+
                 }
                 if (currentPlayer.Name == "Zuckuss") {
-                    bobaVs.hide();
-                    bosskVs.hide();
-                    ig88Vs.hide();
                     zuckussVs.show();
                 }
 
                 if (currentOpponent.Name == "Boba Fett") {
                     bobaVsMirror.show();
-                    ig88VsMirror.hide();
-                    bosskVsMirror.hide();
-                    zuckussVsMirror.hide();
+                   
                 }
                 if (currentOpponent.Name == "Bossk") {
-                    bobaVsMirror.hide();
+                    
                     bosskVsMirror.show();
-                    ig88VsMirror.hide();
-                    zuckussVsMirror.hide();
+                   
                 }
                 if (currentOpponent.Name == "IG-88") {
-                    bobaVsMirror.hide();
-                    bosskVsMirror.hide();
+                    
                     ig88VsMirror.show();
-                    zuckussVsMirror.hide();
+                    
                 }
                 if (currentOpponent.Name == "Zuckuss") {
-                    bobaVsMirror.hide();
-                    bosskVsMirror.hide();
-                    ig88VsMirror.hide();
+                    
                     zuckussVsMirror.show();
                 }
 
@@ -207,6 +207,7 @@
             $(".fight-button").hide();
             $(".round-text").hide();
             $(".fight-screen").show();
+            fightMusic.play();
 
             if (winCount == 0) {
                 playerHp = currentPlayer.Health;
@@ -235,14 +236,14 @@
                 $(".fight-screen").hide();
                 $(".vs-screen").hide();
                 $(".fight-text").html("GAME OVER<br>Play Again?").show()
-            }else if (opponentHp < 1) {
+            } else if (opponentHp < 1) {
                 $(".fight-screen").hide();
                 $(".vs-screen").hide();
                 $(".text-box").text("Please Select Your Next Opponent");
                 $(".prompt-window").show()
                 $(".fight-screen").hide();
                 winCount++;
-                
+
                 if (winCount > 2) {
                     $(".fight-screen").hide();
                     $(".vs-screen").hide();
