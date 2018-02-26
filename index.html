@@ -37,6 +37,7 @@
         var roundText = $("<p>");
         var fightButton = $("<button>");
         var fbText = $("<p>");
+        var vsWindow=$("<div id=vsvsvs>");
         var bobaVs = $("<img src=images/bobavs.png>");
         var ig88Vs = $("<img src=images/ig88vs.png>");
         var bosskVs = $("<img src=images/bosskvs.png>");
@@ -45,6 +46,14 @@
         var ig88VsMirror = $("<img src=images/ig88vsmirror.png>");
         var bosskVsMirror = $("<img src=images/bosskvsmirror.png>");
         var zuckussVsMirror = $("<img src=images/zuckussvsmirror.png>");
+        var bobaText =  $("<img src=images/bobatext.png>");
+        var bosskText =  $("<img src=images/bossktext.png>");
+        var ig88Text =  $("<img src=images/ig88text.png>");
+        var zuckussText =  $("<img src=images/zuckusstext.png>");
+        var bobaTextMirror =  $("<img src=images/bobatextmirror.png>");
+        var bosskTextMirror =  $("<img src=images/bossktextmirror.png>");
+        var ig88TextMirror =  $("<img src=images/ig88textmirror.png>");
+        var zuckussTextMirror =  $("<img src=images/zuckusstextmirror.png>");
         var currentPlayer = "none";
         var currentOpponent
         var playerHp
@@ -97,6 +106,7 @@
         textBox.addClass("text-box");
         playerVs.addClass("player-vs");
         opponentVs.addClass("opponent-vs");
+        vsWindow.addClass("vs-window");
         roundText.addClass("round-text vs-screen");
         fightButton.addClass("fight-button vs-screen");
         fbText.addClass("fb-text  vs-screen");
@@ -108,18 +118,27 @@
         ig88VsMirror.addClass("ig88-vs-mirror vs-screen");
         bosskVsMirror.addClass("bossk-vs-mirror vs-screen");
         zuckussVsMirror.addClass("zuckuss-vs-mirror vs-screen");
+        bobaText.addClass("boba-text vs-text");
+        bosskText.addClass("bossk-text vs-text");
+        ig88Text.addClass("ig88-text vs-text");
+        zuckussText.addClass("zuckuss-text vs-text");
+        bobaTextMirror.addClass("boba-text-mirror vs-text-mirror");
+        bosskTextMirror.addClass("bossk-text-mirror vs-text-mirror");
+        ig88TextMirror.addClass("ig88-text-mirror vs-text-mirror");
+        zuckussTextMirror.addClass("zuckuss-text-mirror vs-text-mirror");
         attackButton.addClass("attack-button fight-screen");
         abText.addClass("ab-text fight-screen");
         fightText.addClass("fight-text fight-screen");
         playerStatus.addClass("player-status fight-screen");
         opponentStatus.addClass("opponent-status fight-screen");
 
-        $("#game-window").append(startButton, promptWindow);
+        $("#game-window").append(startButton, promptWindow, vsWindow);
         $(".start-button").append(sbText);
         $(".sb-text").text("Click To Start");
         $(".prompt-window").append(textBox, selectA, selectB, selectC, selectD).hide();
         $(".text-box").text("Please Select Your Character");
-        $("#game-window").append(fightButton, roundText, bobaVs, ig88Vs, bosskVs, zuckussVs, bobaVsMirror, ig88VsMirror, bosskVsMirror, zuckussVsMirror, attackButton, fightText, playerStatus, opponentStatus);
+        $(".vs-window").append(fightButton, roundText, bobaVs, ig88Vs, bosskVs, zuckussVs, bobaVsMirror, ig88VsMirror, bosskVsMirror, zuckussVsMirror, bobaText, bobaTextMirror, ig88Text, ig88TextMirror, bosskText, bosskTextMirror, zuckussText, zuckussTextMirror)
+        $("#game-window").append(attackButton, fightText, playerStatus, opponentStatus);
         $(".round-text").text("Round 1");
         $(".vs-screen").hide();
         $(".fight-button").append(fbText);
@@ -127,6 +146,79 @@
         $(".attack-button").append(abText);
         $(".ab-text").text("Click To Attack");
         $(".fight-screen").hide();
+        $(".vs-window").hide();
+        $(".boba-vs").attr("id","boba-reveal")
+        $(".bossk-vs").attr("id","bossk-reveal")
+        $(".ig88-vs").attr("id","ig88-reveal")
+        $(".zuckuss-vs").attr("id","zuckuss-reveal")
+        $(".boba-vs-mirror").attr("id","boba-mirror-reveal")
+        $(".bossk-vs-mirror").attr("id","bossk-mirror-reveal")
+        $(".ig88-vs-mirror").attr("id","ig88-mirror-reveal")
+        $(".zuckuss-vs-mirror").attr("id","zuckuss-mirror-reveal")
+
+        function vsReveal(){
+        
+            var image= document.getElementById("vsvsvs")
+            var pos =681
+            var id = setInterval (frame,7);
+            function frame(){
+                if (pos == 0) {
+                    clearInterval (id);
+                } else {
+                pos--;
+                pos--;
+                pos--;
+                
+                image.style.top = pos + "px";
+                
+                    
+                }
+            }
+        }
+
+        function charRevealLeft(charId,start,end){
+        
+        var image= document.getElementById(charId)
+        var pos = start;
+        var id = setInterval (frame,5);
+        function frame(){
+            if (pos == end) {
+                clearInterval (id);
+            } else {
+            pos++;
+            
+            
+            
+            image.style.left = pos + "px";
+            
+                
+            }
+        }
+    }
+
+    function charRevealRight(charId,start,end){
+        
+        var image= document.getElementById(charId)
+        var pos = start;
+        var id = setInterval (frame,5);
+        function frame(){
+            if (pos == end) {
+                clearInterval (id);
+            } else {
+            pos++;
+            
+            
+            
+            image.style.right = pos + "px";
+            
+                
+            }
+        }
+    }
+
+       
+        
+
 
 
 
@@ -160,44 +252,59 @@
                 ig88VsMirror.hide();
                 bosskVsMirror.hide();
                 zuckussVsMirror.hide();
+                $(".vs-window").show();
+                $(".vs-text").hide();
+                $(".vs-text-mirror").hide();
+                
+
                 vsMusic.play();
+                vsReveal();
 
 
 
 
                 if (currentPlayer.Name == "Boba Fett") {
-                        reveal(bobaVs);
+                    bobaVs.show();
+                    charRevealLeft("boba-reveal",-500,0);
+                        
 
                 }
                 if (currentPlayer.Name == "Bossk") {
                     bosskVs.show();
+                    charRevealLeft("bossk-reveal",-500,0);
 
                 }
                 if (currentPlayer.Name == "IG-88") {
                     ig88Vs.show();
+                    charRevealLeft("ig88-reveal",-500,0);
 
                 }
                 if (currentPlayer.Name == "Zuckuss") {
                     zuckussVs.show();
+                    charRevealLeft("zuckuss-reveal",-500,0);
                 }
 
                 if (currentOpponent.Name == "Boba Fett") {
                     bobaVsMirror.show();
+                    charRevealRight("boba-mirror-reveal",-500,0)
                    
                 }
                 if (currentOpponent.Name == "Bossk") {
-                    
                     bosskVsMirror.show();
+                    charRevealRight("bossk-mirror-reveal",-500,0)
+
                    
                 }
                 if (currentOpponent.Name == "IG-88") {
                     
                     ig88VsMirror.show();
+                    charRevealRight("ig88-mirror-reveal",-500,0)
                     
                 }
                 if (currentOpponent.Name == "Zuckuss") {
                     
                     zuckussVsMirror.show();
+                    charRevealRight("zuckuss-mirror-reveal",-500,0)
                 }
 
             }
@@ -207,6 +314,9 @@
             $(".fight-button").hide();
             $(".round-text").hide();
             $(".fight-screen").show();
+            $(".vs-window").hide();
+            vsMusic.pause();
+            vsMusic.currentTime=0;
             fightMusic.play();
 
             if (winCount == 0) {
@@ -236,12 +346,16 @@
                 $(".fight-screen").hide();
                 $(".vs-screen").hide();
                 $(".fight-text").html("GAME OVER<br>Play Again?").show()
+                fightMusic.pause();
+                fightMusic.currentTime=0;
             } else if (opponentHp < 1) {
                 $(".fight-screen").hide();
                 $(".vs-screen").hide();
                 $(".text-box").text("Please Select Your Next Opponent");
                 $(".prompt-window").show()
                 $(".fight-screen").hide();
+                fightMusic.pause();
+                fightMusic.currentTime=0;
                 winCount++;
 
                 if (winCount > 2) {
