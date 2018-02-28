@@ -112,22 +112,22 @@
         vsLogo.addClass("vs-logo vs-screen");
         fightButton.addClass("fight-button vs-screen");
         fbText.addClass("fb-text  vs-screen");
-        bobaVs.addClass("boba-vs vs-screen");
-        ig88Vs.addClass("ig88-vs vs-screen");
-        bosskVs.addClass("bossk-vs vs-screen");
-        zuckussVs.addClass("zuckuss-vs vs-screen");
-        bobaVsMirror.addClass("boba-vs-mirror vs-screen");
-        ig88VsMirror.addClass("ig88-vs-mirror vs-screen");
-        bosskVsMirror.addClass("bossk-vs-mirror vs-screen");
-        zuckussVsMirror.addClass("zuckuss-vs-mirror vs-screen");
-        bobaText.addClass("boba-text vs-text");
-        bosskText.addClass("bossk-text vs-text");
-        ig88Text.addClass("ig88-text vs-text");
-        zuckussText.addClass("zuckuss-text vs-text");
-        bobaTextMirror.addClass("boba-text-mirror vs-text-mirror");
-        bosskTextMirror.addClass("bossk-text-mirror vs-text-mirror");
-        ig88TextMirror.addClass("ig88-text-mirror vs-text-mirror");
-        zuckussTextMirror.addClass("zuckuss-text-mirror vs-text-mirror");
+        bobaVs.addClass("boba-vs vs-screen vs-image");
+        ig88Vs.addClass("ig88-vs vs-screen vs-image");
+        bosskVs.addClass("bossk-vs vs-screen vs-image");
+        zuckussVs.addClass("zuckuss-vs vs-screen vs-image");
+        bobaVsMirror.addClass("boba-vs-mirror vs-screen vs-image-mirror");
+        ig88VsMirror.addClass("ig88-vs-mirror vs-screen vs-image-mirror");
+        bosskVsMirror.addClass("bossk-vs-mirror vs-screen vs-image-mirror");
+        zuckussVsMirror.addClass("zuckuss-vs-mirror vs-screen vs-image-mirror");
+        bobaText.addClass("boba-text vs-text vs-screen");
+        bosskText.addClass("bossk-text vs-text vs-screen");
+        ig88Text.addClass("ig88-text vs-text vs-screen");
+        zuckussText.addClass("zuckuss-text vs-text vs-screen");
+        bobaTextMirror.addClass("boba-text-mirror vs-text-mirror vs-screen");
+        bosskTextMirror.addClass("bossk-text-mirror vs-text-mirror vs-screen");
+        ig88TextMirror.addClass("ig88-text-mirror vs-text-mirror vs-screen");
+        zuckussTextMirror.addClass("zuckuss-text-mirror vs-text-mirror vs-screen");
         attackButton.addClass("attack-button fight-screen");
         abText.addClass("ab-text fight-screen");
         fightText.addClass("fight-text fight-screen");
@@ -321,6 +321,11 @@
                 $(".vs-window").show();
                 $(".vs-text").hide();
                 $(".vs-text-mirror").hide();
+                $(".vs-image").css({"left":"-600px"});
+                $(".vs-image-mirror").css({"right":"-600px"});
+                $(".vs-text").css({"left":"-1280px"});
+                $(".vs-text-mirror").css({"right":"-1280px"});
+                
                 
 
                 vsMusic.play();
@@ -436,6 +441,12 @@
                 $(".text-box").text("Please Select Your Next Opponent");
                 $(".prompt-window").show()
                 $(".fight-screen").hide();
+                bobaVs.hide();
+                ig88Vs.hide();
+                bosskVs.hide();
+                zuckussVs.hide();
+                
+
                 fightMusic.pause();
                 fightMusic.currentTime=0;
                 winCount++;
