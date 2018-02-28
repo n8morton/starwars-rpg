@@ -54,6 +54,7 @@
         var bosskTextMirror =  $("<img src=images/bossktextmirror.png>");
         var ig88TextMirror =  $("<img src=images/ig88textmirror.png>");
         var zuckussTextMirror =  $("<img src=images/zuckusstextmirror.png>");
+        var vsLogo =  $("<img src=images/vs.png>");
         var currentPlayer = "none";
         var currentOpponent
         var playerHp
@@ -108,6 +109,7 @@
         opponentVs.addClass("opponent-vs");
         vsWindow.addClass("vs-window");
         roundText.addClass("round-text vs-screen");
+        vsLogo.addClass("vs-logo vs-screen");
         fightButton.addClass("fight-button vs-screen");
         fbText.addClass("fb-text  vs-screen");
         bobaVs.addClass("boba-vs vs-screen");
@@ -137,7 +139,7 @@
         $(".sb-text").text("Click To Start");
         $(".prompt-window").append(textBox, selectA, selectB, selectC, selectD).hide();
         $(".text-box").text("Please Select Your Character");
-        $(".vs-window").append(fightButton, roundText, bobaVs, ig88Vs, bosskVs, zuckussVs, bobaVsMirror, ig88VsMirror, bosskVsMirror, zuckussVsMirror, bobaText, bobaTextMirror, ig88Text, ig88TextMirror, bosskText, bosskTextMirror, zuckussText, zuckussTextMirror)
+        $(".vs-window").append(fightButton, roundText,vsLogo, bobaVs, ig88Vs, bosskVs, zuckussVs, bobaVsMirror, ig88VsMirror, bosskVsMirror, zuckussVsMirror, bobaText, bobaTextMirror, ig88Text, ig88TextMirror, bosskText, bosskTextMirror, zuckussText, zuckussTextMirror)
         $("#game-window").append(attackButton, fightText, playerStatus, opponentStatus);
         $(".round-text").text("Round 1");
         $(".vs-screen").hide();
@@ -147,14 +149,23 @@
         $(".ab-text").text("Click To Attack");
         $(".fight-screen").hide();
         $(".vs-window").hide();
-        $(".boba-vs").attr("id","boba-reveal")
-        $(".bossk-vs").attr("id","bossk-reveal")
-        $(".ig88-vs").attr("id","ig88-reveal")
-        $(".zuckuss-vs").attr("id","zuckuss-reveal")
-        $(".boba-vs-mirror").attr("id","boba-mirror-reveal")
-        $(".bossk-vs-mirror").attr("id","bossk-mirror-reveal")
-        $(".ig88-vs-mirror").attr("id","ig88-mirror-reveal")
-        $(".zuckuss-vs-mirror").attr("id","zuckuss-mirror-reveal")
+        $(".boba-vs").attr("id","boba-reveal");
+        $(".bossk-vs").attr("id","bossk-reveal");
+        $(".ig88-vs").attr("id","ig88-reveal");
+        $(".zuckuss-vs").attr("id","zuckuss-reveal");
+        $(".boba-vs-mirror").attr("id","boba-mirror-reveal");
+        $(".bossk-vs-mirror").attr("id","bossk-mirror-reveal");
+        $(".ig88-vs-mirror").attr("id","ig88-mirror-reveal");
+        $(".zuckuss-vs-mirror").attr("id","zuckuss-mirror-reveal");
+        $(".boba-text").attr("id","boba-text-reveal");
+        $(".bossk-text").attr("id","bossk-text-reveal");
+        $(".ig88-text").attr("id","ig88-text-reveal");
+        $(".zuckuss-text").attr("id","zuckuss-text-reveal");
+        $(".boba-text-mirror").attr("id","boba-text-mirror-reveal");
+        $(".bossk-text-mirror").attr("id","bossk-text-mirror-reveal");
+        $(".ig88-text-mirror").attr("id","ig88-text-mirror-reveal");
+        $(".zuckuss-text-mirror").attr("id","zuckuss-text-mirror-reveal");
+
 
         function vsReveal(){
         
@@ -176,18 +187,17 @@
             }
         }
 
-        function charRevealLeft(charId,start,end){
+        function charRevealLeft(charId){
         
         var image= document.getElementById(charId)
-        var pos = start;
+        var pos = -576;
         var id = setInterval (frame,5);
         function frame(){
-            if (pos == end) {
+            if (pos == 0) {
                 clearInterval (id);
             } else {
             pos++;
-            
-            
+            pos++;
             
             image.style.left = pos + "px";
             
@@ -196,18 +206,17 @@
         }
     }
 
-    function charRevealRight(charId,start,end){
+    function charRevealRight(charId){
         
         var image= document.getElementById(charId)
-        var pos = start;
+        var pos = -576;
         var id = setInterval (frame,5);
         function frame(){
-            if (pos == end) {
+            if (pos == 0) {
                 clearInterval (id);
             } else {
             pos++;
-            
-            
+            pos++;
             
             image.style.right = pos + "px";
             
@@ -215,6 +224,63 @@
             }
         }
     }
+
+    function textRevealLeft(textId){
+        
+        var image= document.getElementById(textId)
+        var pos = 1280;
+        var id = setInterval (frame,1);
+        function frame(){
+            if (pos == 60) {
+                clearInterval (id);
+            } else {
+            pos--;
+            pos--;
+            pos--;
+            pos--;
+            pos--;
+            pos--;
+            pos--;
+            pos--;
+            pos--;
+            pos--;
+
+            
+            image.style.left = pos + "px";
+            
+                
+            }
+        }
+    }
+
+    function textRevealRight(textId){
+        
+        var image= document.getElementById(textId)
+        var pos = 1280;
+        var id = setInterval (frame,1);
+        function frame(){
+            if (pos == 60) {
+                clearInterval (id);
+            } else {
+            pos--;
+            pos--;
+            pos--;
+            pos--;
+            pos--;
+            pos--;
+            pos--;
+            pos--;
+            pos--;
+            pos--;
+            
+            image.style.right = pos + "px";
+            
+                
+            }
+        }
+    }
+
+     
 
        
         
@@ -265,46 +331,62 @@
 
                 if (currentPlayer.Name == "Boba Fett") {
                     bobaVs.show();
-                    charRevealLeft("boba-reveal",-500,0);
+                    setTimeout(charRevealLeft.bind(null,"boba-reveal"),1500);
+                    bobaText.show();
+                    setTimeout(textRevealLeft.bind(null,"boba-text-reveal"),3000);
                         
 
                 }
                 if (currentPlayer.Name == "Bossk") {
                     bosskVs.show();
-                    charRevealLeft("bossk-reveal",-500,0);
+                    setTimeout(charRevealLeft.bind(null,"bossk-reveal"),1500);
+                    bosskText.show();
+                    setTimeout(textRevealLeft.bind(null,"bossk-text-reveal"),3000);
 
                 }
                 if (currentPlayer.Name == "IG-88") {
                     ig88Vs.show();
-                    charRevealLeft("ig88-reveal",-500,0);
+                    setTimeout(charRevealLeft.bind(null,"ig88-reveal"),1500);
+                    ig88Text.show();
+                    setTimeout(textRevealLeft.bind(null,"ig88-text-reveal"),3000);
 
                 }
                 if (currentPlayer.Name == "Zuckuss") {
                     zuckussVs.show();
-                    charRevealLeft("zuckuss-reveal",-500,0);
+                    setTimeout(charRevealLeft.bind(null,"zuckuss-reveal"),1500);
+                    zuckussText.show();
+                    setTimeout(textRevealLeft.bind(null,"zuckuss-text-reveal"),3000);
                 }
 
                 if (currentOpponent.Name == "Boba Fett") {
                     bobaVsMirror.show();
-                    charRevealRight("boba-mirror-reveal",-500,0)
+                    setTimeout(charRevealRight.bind(null,"boba-mirror-reveal"),1500);
+                    bobaTextMirror.show();
+                    setTimeout(textRevealRight.bind(null,"boba-text-mirror-reveal"),4000);
                    
                 }
                 if (currentOpponent.Name == "Bossk") {
                     bosskVsMirror.show();
-                    charRevealRight("bossk-mirror-reveal",-500,0)
+                    setTimeout(charRevealRight.bind(null,"bossk-mirror-reveal"),1500);
+                    bosskTextMirror.show();
+                    setTimeout(textRevealRight.bind(null,"bossk-text-mirror-reveal"),4000);
 
                    
                 }
                 if (currentOpponent.Name == "IG-88") {
                     
                     ig88VsMirror.show();
-                    charRevealRight("ig88-mirror-reveal",-500,0)
+                    setTimeout(charRevealRight.bind(null,"ig88-mirror-reveal"),1500);
+                    ig88TextMirror.show();
+                    setTimeout(textRevealRight.bind(null,"ig88-text-mirror-reveal"),4000);
                     
                 }
                 if (currentOpponent.Name == "Zuckuss") {
                     
                     zuckussVsMirror.show();
-                    charRevealRight("zuckuss-mirror-reveal",-500,0)
+                    setTimeout(charRevealRight.bind(null,"zuckuss-mirror-reveal"),1500);
+                    zuckussTextMirror.show();
+                    setTimeout(textRevealRight.bind(null,"zuckuss-text-mirror-reveal"),4000);
                 }
 
             }
