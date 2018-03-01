@@ -199,7 +199,7 @@
     top: 681px; 
     left:0px;
     z-index: 15;
-    /* 440 */
+    
 
 }
 
@@ -225,4 +225,106 @@
     top: 200px;
     left: 460px;
  }
+
+ .fight-window{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    /* background-color: black; */
+    top: 0px; 
+    left:0px;
+    z-index: 150;
+ }
+
+ .boba-fight{
+     position:absolute;
+     left:50px;
+     bottom:10px;
+ }
+
+ .boba-fight-mirror{
+    position:absolute;
+    right:50px;
+    bottom:10px;
+}
+
+.bossk-fight{
+    position:absolute;
+    left:50px;
+    bottom:10px;
+}
+
+.bossk-fight-mirror{
+   position:absolute;
+   right:50px;
+   bottom:10px;
+}
+
+.ig88-fight{
+    position:absolute;
+    left:50px;
+    bottom:10px;
+}
+
+.ig88-fight-mirror{
+   position:absolute;
+   right:50px;
+   bottom:10px;
+}
+
+.zuckuss-fight{
+    position:absolute;
+    left:50px;
+    bottom:10px;
+}
+
+.zuckuss-fight-mirror{
+   position:absolute;
+   right:50px;
+   bottom:10px;
+}
+
+.player-lifebar{
+    position:absolute;
+    width:25%;
+    height:25px;
+    top:100px;
+    left:50px;
+    background-color: red;
+    border: white 1px solid;
+}
+
+.opponent-lifebar{
+    position:absolute;
+    width:25%;
+    height:25px;
+    top:100px;
+    right:50px;
+    background-color: red;
+    border: white 1px solid;
+}
+
+.player-life{
+    position:absolute;
+    width:100%;
+    height:25px;
+    top:0px;
+    left:0px;
+    background-color:greenyellow;
+   
+}
+
+.opponent-life{
+    position:absolute;
+    width:100%;
+    height:25px;
+    top:0px;
+    right:0px;
+    background-color:greenyellow;
+   
+}
+
+
+
+ 
 
