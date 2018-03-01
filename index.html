@@ -198,12 +198,12 @@
         $(".player-lifebar").append(playerLife);
         $(".opponent-lifebar").append(opponentLife);
 
-        function lifePercent(lp,hp,maxHp){
-            lp=((hp/maxHp)*100);
+        function lifePercent(lp, hp, maxHp) {
+            lp = ((hp / maxHp) * 100);
             return;
 
         }
-        
+
         function vsReveal() {
 
             var image = document.getElementById("vsvsvs")
@@ -509,8 +509,10 @@
             $(".opponent-status").html("Current Health:" + opponentHp + "<br> Attack Power:" + opponentAtk);
 
             if (playerHp < 1) {
-                $(".fight-window").hide();
+                $(".fight-screen").hide();
                 $(".vs-screen").hide();
+                $(".fight-text").show();
+                $(".fight-window").show();
                 $(".fight-text").html("GAME OVER<br>Play Again?").show()
                 fightMusic.pause();
                 fightMusic.currentTime = 0;
@@ -531,8 +533,10 @@
                 winCount++;
 
                 if (winCount > 2) {
-                    $(".fight-window").hide();
+                    $(".fight-screen").hide();
                     $(".vs-screen").hide();
+                    $(".fight-text").show();
+                    $(".fight-window").show();
                     $(".fight-text").html("CONGRATULATIONS!<BR>YOU WIN!<BR>Play Again?").show();
                     $(".prompt-window").hide();
                 }
