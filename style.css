@@ -15,6 +15,14 @@
     border: grey 1.5px solid
 }
 
+#reset-button {
+    position: absolute;
+    top: 15%;
+    left: 40%;
+    font-size: 1.5em;
+    border: grey 1.5px solid
+}
+
 .prompt-window {
     width: 75%;
     height: 40%;

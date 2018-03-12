@@ -15,13 +15,8 @@
     <!-- helloworld -->
     <container id="main-container">
         <div id="game-window" style="background-image:url(images/jabbabg1.png)">
-
-
-
         </div>
     </container>
-
-
     <script>
         // declare main variables
         var startButton = $("<button>");
@@ -88,6 +83,7 @@
         var vsMusic = new Audio("audio/vs.mp3");
         var fightMusic = new Audio("audio/fightmusic.mp3");
         var reveal = function (x) { x.show() };
+        var resetButton=$("<button id=reset-button>");
         var charA = {
             "Name": "Boba Fett",
             "Health": 160,
@@ -164,7 +160,6 @@
         opponentLifebar.addClass("opponent-lifebar fight-screen");
         opponentLife.addClass("opponent-life fight-screen");
 
-
         $("#game-window").append(startButton, promptWindow, vsWindow, fightWindow);
         $(".start-button").append(sbText);
         $(".sb-text").text("Click To Start");
@@ -192,18 +187,17 @@
         $(".bossk-text-mirror").attr("id", "bossk-text-mirror-reveal");
         $(".ig88-text-mirror").attr("id", "ig88-text-mirror-reveal");
         $(".zuckuss-text-mirror").attr("id", "zuckuss-text-mirror-reveal");
-        $(".fight-window").append(attackButton, fightText, playerStatus, opponentStatus, playerLifebar, opponentLifebar, bobaFight, bobaFightMirror, bosskFight, bosskFightMirror, ig88Fight, ig88FightMirror, zuckussFight, zuckussFightMirror).hide();
+        $(".fight-window").append(resetButton, attackButton, fightText, playerStatus, opponentStatus, playerLifebar, opponentLifebar, bobaFight, bobaFightMirror, bosskFight, bosskFightMirror, ig88Fight, ig88FightMirror, zuckussFight, zuckussFightMirror).hide();
         $(".attack-button").append(abText);
         $(".ab-text").text("Click To Attack");
         $(".player-lifebar").append(playerLife);
         $(".opponent-lifebar").append(opponentLife);
+        resetButton.text("Click To Play Again").hide();
 
         function lifePercent(lp, hp, maxHp) {
             lp = ((hp / maxHp) * 100);
-            return;
-
+            return lp;
         }
-
         function vsReveal() {
 
             var image = document.getElementById("vsvsvs")
@@ -216,14 +210,10 @@
                     pos--;
                     pos--;
                     pos--;
-
                     image.style.top = pos + "px";
-
-
                 }
             }
         }
-
         function charRevealLeft(charId) {
 
             var image = document.getElementById(charId)
@@ -235,14 +225,10 @@
                 } else {
                     pos++;
                     pos++;
-
                     image.style.left = pos + "px";
-
-
                 }
             }
         }
-
         function charRevealRight(charId) {
 
             var image = document.getElementById(charId)
@@ -254,14 +240,10 @@
                 } else {
                     pos++;
                     pos++;
-
                     image.style.right = pos + "px";
-
-
                 }
             }
         }
-
         function textRevealLeft(textId) {
 
             var image = document.getElementById(textId)
@@ -281,15 +263,10 @@
                     pos--;
                     pos--;
                     pos--;
-
-
                     image.style.left = pos + "px";
-
-
                 }
             }
         }
-
         function textRevealRight(textId) {
 
             var image = document.getElementById(textId)
@@ -311,20 +288,13 @@
                     pos--;
 
                     image.style.right = pos + "px";
-
-
                 }
             }
         }
 
+        function reset(){
 
-
-
-
-
-
-
-
+        }
 
         // click to start game
         $(".start-button").click(function () {
@@ -363,35 +333,39 @@
                 $(".vs-text").css({ "left": "-1280px" });
                 $(".vs-text-mirror").css({ "right": "-1280px" });
 
+                if (winCount == 0) {
+                    playerHp = currentPlayer.Health;
+                    playerAtk = currentPlayer.Attack;
+                    playerMaxHp = playerHp;
+                };
 
+                playerBaseAtk = currentPlayer.Attack;
+                opponentHp = currentOpponent.Health;
+                opponentAtk = currentOpponent.CounterAttack;
+                opponentMaxHp = opponentHp;
+                $(".opponent-life").css("width", ((opponentHp / opponentMaxHp) * 100) + "%");
+                $(".round-text").text("Round " + (winCount+1));
 
                 vsMusic.play();
                 vsReveal();
-
-
-
 
                 if (currentPlayer.Name == "Boba Fett") {
                     bobaVs.show();
                     setTimeout(charRevealLeft.bind(null, "boba-reveal"), 1500);
                     bobaText.show();
                     setTimeout(textRevealLeft.bind(null, "boba-text-reveal"), 3000);
-
-
                 }
                 if (currentPlayer.Name == "Bossk") {
                     bosskVs.show();
                     setTimeout(charRevealLeft.bind(null, "bossk-reveal"), 1500);
                     bosskText.show();
                     setTimeout(textRevealLeft.bind(null, "bossk-text-reveal"), 3000);
-
                 }
                 if (currentPlayer.Name == "IG-88") {
                     ig88Vs.show();
                     setTimeout(charRevealLeft.bind(null, "ig88-reveal"), 1500);
                     ig88Text.show();
                     setTimeout(textRevealLeft.bind(null, "ig88-text-reveal"), 3000);
-
                 }
                 if (currentPlayer.Name == "Zuckuss") {
                     zuckussVs.show();
@@ -399,21 +373,17 @@
                     zuckussText.show();
                     setTimeout(textRevealLeft.bind(null, "zuckuss-text-reveal"), 3000);
                 }
-
                 if (currentOpponent.Name == "Boba Fett") {
                     bobaVsMirror.show();
                     setTimeout(charRevealRight.bind(null, "boba-mirror-reveal"), 1500);
                     bobaTextMirror.show();
                     setTimeout(textRevealRight.bind(null, "boba-text-mirror-reveal"), 4000);
-
                 }
                 if (currentOpponent.Name == "Bossk") {
                     bosskVsMirror.show();
                     setTimeout(charRevealRight.bind(null, "bossk-mirror-reveal"), 1500);
                     bosskTextMirror.show();
                     setTimeout(textRevealRight.bind(null, "bossk-text-mirror-reveal"), 4000);
-
-
                 }
                 if (currentOpponent.Name == "IG-88") {
 
@@ -421,7 +391,6 @@
                     setTimeout(charRevealRight.bind(null, "ig88-mirror-reveal"), 1500);
                     ig88TextMirror.show();
                     setTimeout(textRevealRight.bind(null, "ig88-text-mirror-reveal"), 4000);
-
                 }
                 if (currentOpponent.Name == "Zuckuss") {
 
@@ -430,10 +399,8 @@
                     zuckussTextMirror.show();
                     setTimeout(textRevealRight.bind(null, "zuckuss-text-mirror-reveal"), 4000);
                 }
-
             }
         });
-
         $(".fight-button").click(function () {
             $(".fight-button").hide();
             $(".round-text").hide();
@@ -443,17 +410,7 @@
             vsMusic.currentTime = 0;
             fightMusic.play();
 
-            if (winCount == 0) {
-                playerHp = currentPlayer.Health;
-                playerAtk = currentPlayer.Attack;
-                playerMaxHp = playerHp;
-            };
-
-            playerBaseAtk = currentPlayer.Attack;
-            opponentHp = currentOpponent.Health;
-            opponentAtk = currentOpponent.CounterAttack;
-            opponentMaxHp = opponentHp;
-
+           
 
             bobaFight.hide();
             ig88Fight.hide();
@@ -476,7 +433,6 @@
             if (currentPlayer.Name == "Zuckuss") {
                 zuckussFight.show();
             }
-
             if (currentOpponent.Name == "Boba Fett") {
                 bobaFightMirror.show();
             }
@@ -489,21 +445,18 @@
             if (currentOpponent.Name == "Zuckuss") {
                 zuckussFightMirror.show();
             }
-
             $(".player-status").html("Current Health:" + playerHp + "<br> Attack Power:" + playerAtk);
             $(".opponent-status").html("Current Health:" + opponentHp + "<br> Attack Power:" + opponentAtk);
-
-
         });
 
         $(".attack-button").click(function () {
             opponentHp = (opponentHp - playerAtk);
             playerHp = (playerHp - opponentAtk);
             playerAtk = (playerAtk + playerBaseAtk);
-            lifePercent(playerLifePercent, playerHp, playerMaxHp);
-            console.log(playerLifePercent);
-            $(".player-life").css("width", playerLifePercent + "%");
-
+            // lifePercent(playerLifePercent, playerHp, playerMaxHp);
+            // console.log(playerLifePercent);
+            $(".player-life").css("width", ((playerHp / playerMaxHp) * 100) + "%");
+            $(".opponent-life").css("width", ((opponentHp / opponentMaxHp) * 100) + "%");
 
             $(".player-status").html("Current Health:" + playerHp + "<br> Current Attack Power:" + playerAtk);
             $(".opponent-status").html("Current Health:" + opponentHp + "<br> Attack Power:" + opponentAtk);
@@ -514,6 +467,7 @@
                 $(".fight-text").show();
                 $(".fight-window").show();
                 $(".fight-text").html("GAME OVER<br>Play Again?").show()
+                resetButton.show();
                 fightMusic.pause();
                 fightMusic.currentTime = 0;
             } else if (opponentHp < 1) {
@@ -526,8 +480,6 @@
                 ig88Vs.hide();
                 bosskVs.hide();
                 zuckussVs.hide();
-
-
                 fightMusic.pause();
                 fightMusic.currentTime = 0;
                 winCount++;
@@ -539,15 +491,11 @@
                     $(".fight-window").show();
                     $(".fight-text").html("CONGRATULATIONS!<BR>YOU WIN!<BR>Play Again?").show();
                     $(".prompt-window").hide();
+                    resetButton.show();
                 }
             }
-
-
-
         });
-
     </script>
-
 </body>
 
 </html>
